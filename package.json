@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "",
+    "start:dev": "tsx watch src/main/server.ts",
     "start:": "",
-    "build": "",
+    "build": "tsup src --out-dir build",
     "test:create-prisma-environment": "",
     "test:install-prisma-environment": "",
     "test:": "",
@@ -19,5 +19,11 @@
   },
   "keywords": [],
   "author": "Onildo Gonçalves",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "18.15.11",
+    "tsup": "6.7.0",
+    "tsx": "3.12.6",
+    "typescript": "5.0.3"
+  }
 }
