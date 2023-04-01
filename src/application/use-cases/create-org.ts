@@ -2,7 +2,7 @@ import { makeBcryptEncoder } from "../factories/make-encoder";
 import { Org, OrgsInterface } from "../interfaces/orgs-interface";
 import { OrgAlreadyExistsError } from "./errors/org-already-exists-error";
 
-interface CreateGymUseCaseRequest {
+interface CreateOrgUseCaseRequest {
   name: string;
   email: string;
   cep: string;
@@ -25,7 +25,7 @@ export class CreateOrgUseCase {
     address,
     phone,
     password,
-  }: CreateGymUseCaseRequest): Promise<CreateOrgUseCaseResponse> {
+  }: CreateOrgUseCaseRequest): Promise<CreateOrgUseCaseResponse> {
     const orgWithSomeEmail = await this.orgsInterface.findByEmail(email);
     if (orgWithSomeEmail) {
       throw new OrgAlreadyExistsError();
