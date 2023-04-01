@@ -1,5 +1,6 @@
 export interface Pet {
   id?: string;
+  org_id: string;
   name: string;
   age: "Filhote" | "Adulto"; // Filter
   description: string;

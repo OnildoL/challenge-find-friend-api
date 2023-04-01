@@ -38,6 +38,7 @@ export class InMemoryPetsRepository implements PetsInterface {
   async create(data: Pet) {
     const pet = {
       id: data.id ?? randomUUID(),
+      org_id: data.org_id,
       name: data.name,
       age: data.age,
       description: data.description,

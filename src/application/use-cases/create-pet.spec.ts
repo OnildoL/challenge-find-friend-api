@@ -1,18 +1,34 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { InMemoryPetsRepository } from "@/infrastructure/databases/in-memory/in-memory-pets-repository";
 import { CreatePetUseCase } from "./create-pet";
+import { InMemoryOrgsRepository } from "@/infrastructure/databases/in-memory/in-memory-orgs-repository";
+import { makeBcryptEncoder } from "../factories/make-encoder";
 
 let petsRepository: InMemoryPetsRepository;
+let orgsRepository: InMemoryOrgsRepository;
 let sut: CreatePetUseCase;
 
 describe("Create Pet Use Case", () => {
   beforeEach(() => {
     petsRepository = new InMemoryPetsRepository();
+    orgsRepository = new InMemoryOrgsRepository();
     sut = new CreatePetUseCase(petsRepository);
   });
 
   it("should be able to create a pet", async () => {
+    const password_hash = await makeBcryptEncoder().encode("123456");
+
+    const org = await orgsRepository.create({
+      name: "John Doe",
+      email: "johndoe@gmail.com",
+      cep: "00000000",
+      address: "Rua do John Doe, 152",
+      phone: "83900000000",
+      password: password_hash,
+    });
+
     const { pet } = await sut.execute({
+      org_id: org.id,
       name: "Alfredo",
       age: "Filhote",
       description:
@@ -34,5 +50,6 @@ describe("Create Pet Use Case", () => {
     });
 
     expect(pet.id).toEqual(expect.any(String));
+    expect(pet.org_id).toEqual(org.id);
   });
 });

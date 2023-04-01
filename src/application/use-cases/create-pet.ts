@@ -1,6 +1,7 @@
 import { Pet, PetsInterface } from "../interfaces/pets-interface";
 
 interface CreatePetUseCaseRequest {
+  org_id: string;
   name: string;
   age: "Filhote" | "Adulto";
   description: string;
@@ -23,6 +24,7 @@ export class CreatePetUseCase {
   constructor(private petsInterface: PetsInterface) {}
 
   async execute({
+    org_id,
     name,
     age,
     description,
@@ -37,6 +39,7 @@ export class CreatePetUseCase {
     requirements,
   }: CreatePetUseCaseRequest): Promise<CreatePetUseCaseResponse> {
     const pet = await this.petsInterface.create({
+      org_id,
       name,
       age,
       description,
