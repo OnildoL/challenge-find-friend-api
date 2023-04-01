@@ -4,6 +4,14 @@ import { Pet, PetsInterface } from "@/application/interfaces/pets-interface";
 export class InMemoryPetsRepository implements PetsInterface {
   public items: Pet[] = [];
 
+  async findById(id: string) {
+    const pet = this.items.find((item) => item.id === id);
+    if (!pet) {
+      return null;
+    }
+    return pet;
+  }
+
   async searchMany(query: string, page: number, filters?: Partial<Pet>) {
     const filteredItems = this.items.filter((item) => {
       if (!item.city.includes(query)) {

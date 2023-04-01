@@ -17,6 +17,7 @@ export interface Pet {
 
 export interface PetsInterface {
   create(data: Pet): Promise<Pet>;
+  findById(id: string): Promise<Pet | null>;
   searchMany(
     query: string,
     page: number,
