@@ -1,4 +1,4 @@
-import { ValidatorInterface } from "@/application/interfaces/zod-validator-interface";
+import { ValidatorInterface } from "@/application/interfaces/validators-interface";
 import "dotenv/config";
 import { z } from "zod";
 
