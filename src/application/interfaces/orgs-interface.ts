@@ -10,4 +10,5 @@ export interface Org {
 
 export interface OrgsInterface {
   create(data: Org): Promise<Org>;
+  findByEmail(email: string): Promise<Org | null>;
 }

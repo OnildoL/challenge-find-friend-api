@@ -7,26 +7,28 @@
     "start:dev": "tsx watch src/main/server.ts",
     "start:": "",
     "build": "tsup src --out-dir build",
-    "test:create-prisma-environment": "",
-    "test:install-prisma-environment": "",
-    "test:": "",
-    "test:watch": "",
-    "pretest:e2e": "",
+    "test": "vitest run --dir src/application/use-cases",
+    "test:watch": "vitest --dir src/application/use-cases",
     "test:e2e": "",
     "test:e2e:watch": "",
-    "test:coverage": "",
-    "test:ui": ""
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
   },
   "keywords": [],
   "author": "Onildo Gonçalves",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcryptjs": "2.4.2",
     "@types/node": "18.15.11",
+    "@vitest/coverage-c8": "0.29.8",
     "tsup": "6.7.0",
     "tsx": "3.12.6",
-    "typescript": "5.0.3"
+    "typescript": "5.0.3",
+    "vite-tsconfig-paths": "4.0.7",
+    "vitest": "0.29.8"
   },
   "dependencies": {
+    "bcryptjs": "2.4.3",
     "dotenv": "16.0.3",
     "zod": "3.21.4"
   }

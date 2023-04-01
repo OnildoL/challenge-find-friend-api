@@ -19,8 +19,8 @@ São as funcionalidades específicas que o sistema deve oferecer para atender à
 necessidades do usuário e cumprir os objetivos do negócio. Eles definem o que
 o sistema deve fazer.
 
-- [] Deve ser possível se cadastrar como uma ORG;
-- [] Deve ser possível realizar login como uma ORG;
+- [x] Deve ser possível se cadastrar como uma ORG;
+- [x] Deve ser possível realizar login como uma ORG;
 - [] Deve ser possível cadastrar um pet;
 - [] Deve ser possível listar todos os pets disponíveis para adoção em uma cidade;
 - [] Deve ser possível filtrar pets por suas características;

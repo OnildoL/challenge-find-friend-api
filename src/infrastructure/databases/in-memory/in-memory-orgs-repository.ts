@@ -4,6 +4,14 @@ import { Org, OrgsInterface } from "@/application/interfaces/orgs-interface";
 export class InMemoryOrgsRepository implements OrgsInterface {
   public items: Org[] = [];
 
+  async findByEmail(email: string) {
+    const org = this.items.find((item) => item.email === email);
+    if (!org) {
+      return null;
+    }
+    return org;
+  }
+
   async create(data: Org) {
     const org = {
       id: data.id ?? randomUUID(),
