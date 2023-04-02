@@ -6,6 +6,15 @@ interface Env {
   BCRYPT_ROUNDS: number;
 }
 
+interface Org {
+  name: string;
+  email: string;
+  cep: string;
+  address: string;
+  phone: string;
+  password: string;
+}
 export interface ValidatorInterface {
   validateProcessEnv(): Promise<Env | Error>;
+  validateOrgBody(body: any): Promise<Org>;
 }

@@ -1,5 +1,6 @@
 import { makeBcryptEncoder } from "../factories/make-encoder";
 import { Org, OrgsInterface } from "../interfaces/orgs-interface";
+import { UseCaseInterface } from "../interfaces/use-case";
 import { OrgAlreadyExistsError } from "./errors/org-already-exists-error";
 
 interface CreateOrgUseCaseRequest {
@@ -15,7 +16,7 @@ interface CreateOrgUseCaseResponse {
   org: Org;
 }
 
-export class CreateOrgUseCase {
+export class CreateOrgUseCase implements UseCaseInterface {
   constructor(private orgsInterface: OrgsInterface) {}
 
   async execute({

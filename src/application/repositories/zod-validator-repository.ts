@@ -3,6 +3,19 @@ import "dotenv/config";
 import { z } from "zod";
 
 export class ZodValidatorRepository implements ValidatorInterface {
+  async validateOrgBody(_body: any) {
+    const createBodySchema = z.object({
+      name: z.string(),
+      email: z.string().email(),
+      cep: z.string(),
+      address: z.string(),
+      phone: z.string(),
+      password: z.string().min(6),
+    });
+    const body = createBodySchema.parse(_body);
+    return body;
+  }
+
   async validateProcessEnv() {
     const envSchema = z.object({
       PORT: z.coerce.number().default(3000),
