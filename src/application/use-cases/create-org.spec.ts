@@ -1,5 +1,5 @@
 import { InMemoryOrgsRepository } from "@/infrastructure/databases/in-memory/in-memory-orgs-repository";
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterAll, beforeEach, describe, expect, it } from "vitest";
 import { CreateOrgUseCase } from "./create-org";
 import { makeBcryptEncoder } from "../factories/make-encoder";
 import { OrgAlreadyExistsError } from "./errors/org-already-exists-error";
@@ -9,7 +9,7 @@ let sut: CreateOrgUseCase;
 
 describe("Create Org Use Case", () => {
   beforeEach(() => {
-    orgsRepository = new InMemoryOrgsRepository();
+    orgsRepository = InMemoryOrgsRepository.getInstance();
     sut = new CreateOrgUseCase(orgsRepository);
   });
 
@@ -24,6 +24,7 @@ describe("Create Org Use Case", () => {
     });
 
     expect(org.id).toEqual(expect.any(String));
+    await orgsRepository.clearDatabase();
   });
 
   it("should be able to hash organization password upon registration", async () => {
@@ -42,6 +43,7 @@ describe("Create Org Use Case", () => {
     );
 
     expect(isPassordCorrectlyHashed).toBe(true);
+    await orgsRepository.clearDatabase();
   });
 
   it("Should not be able to register with same email twice", async () => {

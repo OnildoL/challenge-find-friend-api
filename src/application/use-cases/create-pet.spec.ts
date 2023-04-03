@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterAll, beforeEach, describe, expect, it } from "vitest";
 import { InMemoryPetsRepository } from "@/infrastructure/databases/in-memory/in-memory-pets-repository";
 import { CreatePetUseCase } from "./create-pet";
 import { InMemoryOrgsRepository } from "@/infrastructure/databases/in-memory/in-memory-orgs-repository";
@@ -11,8 +11,12 @@ let sut: CreatePetUseCase;
 describe("Create Pet Use Case", () => {
   beforeEach(() => {
     petsRepository = new InMemoryPetsRepository();
-    orgsRepository = new InMemoryOrgsRepository();
+    orgsRepository = InMemoryOrgsRepository.getInstance();
     sut = new CreatePetUseCase(petsRepository);
+  });
+
+  afterAll(async () => {
+    orgsRepository.clearDatabase();
   });
 
   it("should be able to create a pet", async () => {

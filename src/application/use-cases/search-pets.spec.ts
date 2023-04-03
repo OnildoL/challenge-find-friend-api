@@ -1,6 +1,6 @@
 import { InMemoryPetsRepository } from "@/infrastructure/databases/in-memory/in-memory-pets-repository";
 import { SearchPetsUseCase } from "./search-pets";
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterAll, beforeEach, describe, expect, it } from "vitest";
 import { InMemoryOrgsRepository } from "@/infrastructure/databases/in-memory/in-memory-orgs-repository";
 import { makeBcryptEncoder } from "../factories/make-encoder";
 
@@ -11,8 +11,12 @@ let sut: SearchPetsUseCase;
 describe("Search Gyms usecase", () => {
   beforeEach(async () => {
     petsRepository = new InMemoryPetsRepository();
-    orgsRepository = new InMemoryOrgsRepository();
+    orgsRepository = InMemoryOrgsRepository.getInstance();
     sut = new SearchPetsUseCase(petsRepository);
+  });
+
+  afterAll(async () => {
+    orgsRepository.clearDatabase();
   });
 
   it("Should be able search for pets by city", async () => {

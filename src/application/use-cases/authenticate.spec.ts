@@ -1,5 +1,5 @@
 import { InMemoryOrgsRepository } from "@/infrastructure/databases/in-memory/in-memory-orgs-repository";
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterAll, beforeEach, describe, expect, it } from "vitest";
 import { makeBcryptEncoder } from "../factories/make-encoder";
 import { AuthenticateUseCase } from "./authenticate";
 import { InvalidCredentialsError } from "./errors/invalid-credentials-error";
@@ -9,7 +9,7 @@ let sut: AuthenticateUseCase;
 
 describe("Authenticate Use Case", () => {
   beforeEach(() => {
-    orgsRepository = new InMemoryOrgsRepository();
+    orgsRepository = InMemoryOrgsRepository.getInstance();
     sut = new AuthenticateUseCase(orgsRepository);
   });
 
@@ -31,6 +31,7 @@ describe("Authenticate Use Case", () => {
     });
 
     expect(org.id).toEqual(expect.any(String));
+    await orgsRepository.clearDatabase();
   });
 
   it("should not be able to authenticate with wrong email", async () => {

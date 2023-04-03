@@ -1,5 +1,5 @@
 import { InMemoryPetsRepository } from "@/infrastructure/databases/in-memory/in-memory-pets-repository";
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterAll, beforeEach, describe, expect, it } from "vitest";
 import { GetPetProfileUseCase } from "./get-pet-profile";
 import { InMemoryOrgsRepository } from "@/infrastructure/databases/in-memory/in-memory-orgs-repository";
 import { makeBcryptEncoder } from "../factories/make-encoder";
@@ -12,8 +12,12 @@ let sut: GetPetProfileUseCase;
 describe("Get Pet Profile Use Case", () => {
   beforeEach(() => {
     petsRepository = new InMemoryPetsRepository();
-    orgsRepository = new InMemoryOrgsRepository();
+    orgsRepository = InMemoryOrgsRepository.getInstance();
     sut = new GetPetProfileUseCase(petsRepository);
+  });
+
+  afterAll(async () => {
+    orgsRepository.clearDatabase();
   });
 
   it("should be able to get pet profile", async () => {

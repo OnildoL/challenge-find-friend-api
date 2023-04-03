@@ -2,7 +2,20 @@ import { randomUUID } from "node:crypto";
 import { Org, OrgsInterface } from "@/application/interfaces/orgs-interface";
 
 export class InMemoryOrgsRepository implements OrgsInterface {
-  public items: Org[] = [];
+  private items: Org[] = [];
+  private static instance: InMemoryOrgsRepository;
+  private constructor() {}
+
+  public static getInstance(): InMemoryOrgsRepository {
+    if (!InMemoryOrgsRepository.instance) {
+      InMemoryOrgsRepository.instance = new InMemoryOrgsRepository();
+    }
+    return InMemoryOrgsRepository.instance;
+  }
+
+  public async clearDatabase() {
+    return (this.items = []);
+  }
 
   async findByEmail(email: string) {
     const org = this.items.find((item) => item.email === email);
