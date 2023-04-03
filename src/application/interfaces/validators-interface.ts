@@ -1,3 +1,6 @@
+import { Org } from "./orgs-interface";
+import { Pet } from "./pets-interface";
+
 interface Env {
   PORT: number;
   NODE_ENV: string;
@@ -5,16 +8,8 @@ interface Env {
   DATABASE_URL: string;
   BCRYPT_ROUNDS: number;
 }
-
-interface Org {
-  name: string;
-  email: string;
-  cep: string;
-  address: string;
-  phone: string;
-  password: string;
-}
 export interface ValidatorInterface {
   validateProcessEnv(): Promise<Env | Error>;
   validateOrgBody(body: any): Promise<Org>;
+  validatePetBody(body: any): Promise<Pet>;
 }

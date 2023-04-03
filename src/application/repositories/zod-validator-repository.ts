@@ -3,6 +3,26 @@ import "dotenv/config";
 import { z } from "zod";
 
 export class ZodValidatorRepository implements ValidatorInterface {
+  async validatePetBody(_body: any) {
+    const createBodySchema = z.object({
+      org_id: z.string().uuid(),
+      name: z.string(),
+      age: z.enum(["Filhote", "Adulto"]),
+      description: z.string(),
+      energy_level: z.number(),
+      size: z.enum(["Pequenino", "Médio", "Grande"]),
+      level_independence: z.enum(["Baixo", "Médio", "Alto"]),
+      type: z.string(),
+      breed: z.string(),
+      environment: z.string(),
+      city: z.string(),
+      uf: z.string(),
+      requirements: z.array(z.string()),
+    });
+    const body = createBodySchema.parse(_body);
+    return body;
+  }
+
   async validateOrgBody(_body: any) {
     const createBodySchema = z.object({
       name: z.string(),
