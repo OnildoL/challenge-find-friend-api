@@ -8,8 +8,14 @@ interface Env {
   DATABASE_URL: string;
   BCRYPT_ROUNDS: number;
 }
+
+interface Auth {
+  email: string;
+  password: string;
+}
 export interface ValidatorInterface {
   validateProcessEnv(): Promise<Env | Error>;
   validateOrgBody(body: any): Promise<Org>;
   validatePetBody(body: any): Promise<Pet>;
+  validateAuthenticate(body: any): Promise<Auth>;
 }

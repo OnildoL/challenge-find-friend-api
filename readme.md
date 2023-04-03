@@ -32,7 +32,7 @@ São as restrições, políticas, procedimentos e diretrizes que regem a operaç
 negócio. Elas definem as restrições e diretrizes que o sistema deve seguir para
 atender às necessidades do negócio e dos usuários.
 
-- [] Para uma ORG acessar a aplicação como admin, ela precisa estar logada;
+- [x] Para uma ORG acessar a aplicação como admin, ela precisa estar logada;
 - [x] Uma ORG precisa ter um endereço e um número de WhatsApp;
 - [x] Um pet deve estar ligado a uma ORG;
 - [x] O usuário que quer adotar, entrará em contato com a ORG via WhatsApp;

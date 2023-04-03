@@ -3,6 +3,15 @@ import "dotenv/config";
 import { z } from "zod";
 
 export class ZodValidatorRepository implements ValidatorInterface {
+  async validateAuthenticate(_body: any) {
+    const authenticateBodySchema = z.object({
+      email: z.string().email(),
+      password: z.string().min(6),
+    });
+    const body = authenticateBodySchema.parse(_body);
+    return body;
+  }
+
   async validatePetBody(_body: any) {
     const createBodySchema = z.object({
       org_id: z.string().uuid(),
