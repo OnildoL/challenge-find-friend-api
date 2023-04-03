@@ -4,7 +4,7 @@ import { makeCreateOrg } from "@/application/factories/make-create-org";
 
 export async function applicationRoutes(app: FastifyInstance) {
   // Org
-  app.post("/pets", adaptRoute(makeCreateOrg()));
+  app.post("/orgs", adaptRoute(makeCreateOrg()));
 
   // Pet
 }
