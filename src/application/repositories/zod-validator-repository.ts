@@ -1,8 +1,36 @@
-import { ValidatorInterface } from "@/application/interfaces/validators-interface";
+import {
+  Params,
+  ValidatorInterface,
+} from "@/application/interfaces/validators-interface";
 import "dotenv/config";
 import { z } from "zod";
 
 export class ZodValidatorRepository implements ValidatorInterface {
+  async validateSearchPets(_query: Params) {
+    const objSchema = {
+      query: _query.query,
+      page: _query.page,
+      filters: {
+        age: _query.age,
+        energy_level: _query.energy_level,
+        size: _query.size,
+        level_independence: _query.level_independence,
+      },
+    };
+    const searchPetsBodySchema = z.object({
+      query: z.string(),
+      page: z.coerce.number().min(1).default(1),
+      filters: z.object({
+        age: z.enum(["Filhote", "Adulto"]).optional(),
+        energy_level: z.coerce.number().optional(),
+        size: z.enum(["Pequenino", "Médio", "Grande"]).optional(),
+        level_independence: z.enum(["Baixo", "Médio", "Alto"]).optional(),
+      }),
+    });
+    const query = searchPetsBodySchema.parse(objSchema);
+    return query;
+  }
+
   async validateAuthenticate(_body: any) {
     const authenticateBodySchema = z.object({
       email: z.string().email(),

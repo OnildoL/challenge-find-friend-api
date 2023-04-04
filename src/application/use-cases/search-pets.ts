@@ -1,4 +1,5 @@
 import { Pet, PetsInterface } from "../interfaces/pets-interface";
+import { UseCaseInterface } from "../interfaces/use-case";
 
 interface SearchPetsUseCaseRequest {
   query: string;
@@ -15,10 +16,10 @@ interface SearchPetsUseCaseResponse {
   pets: Pet[];
 }
 
-export class SearchPetsUseCase {
+export class SearchPetsUseCase implements UseCaseInterface {
   constructor(private petsInterface: PetsInterface) {}
 
-  async handle({
+  async execute({
     query,
     page,
     filters,

@@ -2,7 +2,20 @@ import { randomUUID } from "node:crypto";
 import { Pet, PetsInterface } from "@/application/interfaces/pets-interface";
 
 export class InMemoryPetsRepository implements PetsInterface {
-  public items: Pet[] = [];
+  private items: Pet[] = [];
+  private static instance: InMemoryPetsRepository;
+  private constructor() {}
+
+  public static getInstance(): InMemoryPetsRepository {
+    if (!InMemoryPetsRepository.instance) {
+      InMemoryPetsRepository.instance = new InMemoryPetsRepository();
+    }
+    return InMemoryPetsRepository.instance;
+  }
+
+  public async clearDatabase() {
+    return (this.items = []);
+  }
 
   async findById(id: string) {
     const pet = this.items.find((item) => item.id === id);

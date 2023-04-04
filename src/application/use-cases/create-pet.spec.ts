@@ -10,7 +10,7 @@ let sut: CreatePetUseCase;
 
 describe("Create Pet Use Case", () => {
   beforeEach(() => {
-    petsRepository = new InMemoryPetsRepository();
+    petsRepository = InMemoryPetsRepository.getInstance();
     orgsRepository = InMemoryOrgsRepository.getInstance();
     sut = new CreatePetUseCase(petsRepository);
   });

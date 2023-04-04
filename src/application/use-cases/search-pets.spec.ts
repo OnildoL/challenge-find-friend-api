@@ -10,7 +10,7 @@ let sut: SearchPetsUseCase;
 
 describe("Search Gyms usecase", () => {
   beforeEach(async () => {
-    petsRepository = new InMemoryPetsRepository();
+    petsRepository = InMemoryPetsRepository.getInstance();
     orgsRepository = InMemoryOrgsRepository.getInstance();
     sut = new SearchPetsUseCase(petsRepository);
   });
@@ -75,13 +75,14 @@ describe("Search Gyms usecase", () => {
       ],
     });
 
-    const { pets } = await sut.handle({
+    const { pets } = await sut.execute({
       query: "João Pessoa",
       page: 1,
     });
 
     expect(pets).toHaveLength(1);
     expect(pets).toEqual([expect.objectContaining({ city: "João Pessoa" })]);
+    await petsRepository.clearDatabase();
   });
 
   it("Should be able search for pets by their traits", async () => {
@@ -140,7 +141,7 @@ describe("Search Gyms usecase", () => {
       ],
     });
 
-    const { pets } = await sut.handle({
+    const { pets } = await sut.execute({
       query: "João Pessoa",
       page: 1,
       filters: {

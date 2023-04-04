@@ -11,7 +11,7 @@ let sut: GetPetProfileUseCase;
 
 describe("Get Pet Profile Use Case", () => {
   beforeEach(() => {
-    petsRepository = new InMemoryPetsRepository();
+    petsRepository = InMemoryPetsRepository.getInstance();
     orgsRepository = InMemoryOrgsRepository.getInstance();
     sut = new GetPetProfileUseCase(petsRepository);
   });

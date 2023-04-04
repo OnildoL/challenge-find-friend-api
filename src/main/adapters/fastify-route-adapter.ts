@@ -6,6 +6,7 @@ export const adaptRoute = (controller: WebController) => {
   return async (request: FastifyRequest, response: FastifyReply) => {
     const httpRequest: HttpRequestInterface = {
       body: request.body,
+      query: request.query,
     };
     const httpResponse = await controller.execute(httpRequest);
     response.status(httpResponse.statusCode).send(httpResponse.body);
