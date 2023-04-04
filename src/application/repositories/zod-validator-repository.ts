@@ -1,11 +1,20 @@
 import {
   Params,
+  PetId,
   ValidatorInterface,
 } from "@/application/interfaces/validators-interface";
 import "dotenv/config";
 import { z } from "zod";
 
 export class ZodValidatorRepository implements ValidatorInterface {
+  async validateGetPet(params: PetId) {
+    const paramsBodySchema = z.object({
+      id: z.string().uuid(),
+    });
+    const id = paramsBodySchema.parse(params);
+    return id;
+  }
+
   async validateSearchPets(_query: Params) {
     const objSchema = {
       query: _query.query,

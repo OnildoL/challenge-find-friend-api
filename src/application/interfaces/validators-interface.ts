@@ -22,10 +22,16 @@ export interface Params {
   size?: "Pequenino" | "Médio" | "Grande";
   level_independence?: "Baixo" | "Médio" | "Alto";
 }
+
+export interface PetId {
+  id: string;
+}
+
 export interface ValidatorInterface {
   validateProcessEnv(): Promise<Env | Error>;
   validateOrgBody(body: any): Promise<Org>;
   validatePetBody(body: any): Promise<Pet>;
   validateAuthenticate(body: any): Promise<Auth>;
-  validateSearchPets(body: any): Promise<Params>;
+  validateSearchPets(query: any): Promise<Params>;
+  validateGetPet(id: any): Promise<PetId>;
 }

@@ -7,6 +7,7 @@ export const adaptRoute = (controller: WebController) => {
     const httpRequest: HttpRequestInterface = {
       body: request.body,
       query: request.query,
+      params: request.params,
     };
     const httpResponse = await controller.execute(httpRequest);
     response.status(httpResponse.statusCode).send(httpResponse.body);
